@@ -14,8 +14,8 @@ if not API_KEY:
 
 # Constants
 DB_FILE = "data/air_quality.db"
-ZIP_CODES = ["90001", "10001", "60601"]  # Example: Los Angeles, New York, Chicago
-PARAMETERS = ["PM2.5", "PM10", "O3", "NO2"]  # AirNow parameter names
+ZIP_CODES = ["90001", "10001", "60601"]  # Los Angeles, New York, Chicago
+PARAMETERS = ["PM2.5", "PM10", "O3", "NO2"]
 START_DATE = datetime(2020, 7, 1)
 END_DATE = datetime(2025, 7, 1)
 BASE_URL = "https://www.airnowapi.org/aq/observation/zipCode/historical/"
@@ -62,6 +62,11 @@ def store_to_sqlite(data):
         print("No data to store.")
         return
     df = pd.DataFrame(data)
+    # Drop columns with dicts
+    for col in df.columns:
+        if df[col].apply(lambda x: isinstance(x, dict)).any():
+            print(f"Dropping column with dicts: {col}")
+            df = df.drop(columns=[col])
     try:
         os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
         conn = sqlite3.connect(DB_FILE)
