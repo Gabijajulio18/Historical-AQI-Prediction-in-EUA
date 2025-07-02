@@ -14,7 +14,7 @@ if not API_KEY:
 
 # Constants
 DB_FILE = "data/air_quality.db"
-ZIP_CODES = ["90001", "10001", "60601"]  # Los Angeles, New York, Chicago
+ZIP_CODES = ["90001"]  # Los Angeles
 PARAMETERS = ["PM2.5", "PM10", "O3", "NO2"]
 START_DATE = datetime(2020, 7, 1)
 END_DATE = datetime(2025, 7, 1)
@@ -70,10 +70,10 @@ def store_to_sqlite(data):
     try:
         os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
         conn = sqlite3.connect(DB_FILE)
-        df.to_sql("air_quality_measurements", conn, if_exists="replace", index=False)
+        df.to_sql("air_quality_measurements", conn, if_exists="append", index=False)
         conn.close()
         print(f"DB created and data saved at {DB_FILE}")
-        print(f"✅ Stored {len(df)} rows to DB.")
+        print(f"Stored {len(df)} rows to DB.")
     except Exception as e:
         print(f"Error writing to DB: {e}")
 
@@ -89,11 +89,11 @@ def main():
                 year_start = START_DATE
             if year == END_DATE.year:
                 year_end = END_DATE
-            print(f"\n📦 Fetching data for ZIP: {zip_code}, Year: {year}")
+            print(f"\nFetching data for ZIP: {zip_code}, Year: {year}")
             data = fetch_airnow_data(zip_code, year_start, year_end)
             print(f"   ↳ {len(data)} records fetched for {zip_code} in {year}")
             store_to_sqlite(data)  # Or save to a CSV per ZIP/year
-    print(f"\n🏁 Done in {round(time() - start_time, 2)} seconds.")
+    print(f"\nDone in {round(time() - start_time, 2)} seconds.")
 
 
 if __name__ == "__main__":
