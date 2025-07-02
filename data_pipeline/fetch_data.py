@@ -6,6 +6,16 @@ from dotenv import load_dotenv
 from time import sleep, time
 from datetime import datetime, timedelta
 
+# NOTE:
+# Instead of pulling data directly from the OpenAQ API in real time,
+# we are using a pre-downloaded dataset.
+# This decision was made due to the API's rate limits and the large volume of historical
+# data needed for analysis.
+# Fetching this amount of data via the API would be inefficient and error-prone for local
+# development and testing.
+# Using a static dataset ensures reproducibility, faster iteration, and avoids exceeding
+# API usage quotas.
+
 # Load API Key
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
