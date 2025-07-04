@@ -1,0 +1,1 @@
+⚠️ Although this project uses a static dataset, code is included to support future data fetching from the OpenAQ API — currently disabled due to rate limits and long request times for historical data. Using a local dataset from Kaggle accelerates development and makes this project reproducible.
