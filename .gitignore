@@ -209,3 +209,4 @@ __marimo__/
 # Additional files
 air_quality.db
 pollution_us_2000_2016.csv
+cleaned_pollutants_sorted.csv
