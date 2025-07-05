@@ -14,6 +14,7 @@ from tensorflow.keras.layers import (
 )
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.regularizers import l2
 
 
 def main():
@@ -53,13 +54,13 @@ def main():
         [
             Input(shape=(X_train.shape[1],)),
             normalizer,
-            Dense(256, activation="relu"),
+            Dense(256, activation="relu", kernel_regularizer=l2(1e-4)),
             BatchNormalization(),
-            Dropout(0.3),
-            Dense(128, activation="relu"),
+            Dropout(0.4),
+            Dense(128, activation="relu", kernel_regularizer=l2(1e-4)),
             BatchNormalization(),
-            Dropout(0.3),
-            Dense(64, activation="relu"),
+            Dropout(0.4),
+            Dense(64, activation="relu", kernel_regularizer=l2(1e-4)),
             Dense(4, activation="linear"),  # Linear output for 4 AQI predictions
         ]
     )
