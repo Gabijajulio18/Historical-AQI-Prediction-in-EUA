@@ -40,3 +40,42 @@ We will apply these functions to fill in missing AQI values for SO₂ and CO whe
 - Provides transparency and consistency in how AQI values are handled across the dataset.
 
 ---
+✅ 1. NO₂ AQI
+
+    Trend: The model follows the diagonal quite well, especially in the 0–60 AQI range.
+
+    Bias: There is underestimation for higher NO₂ AQI values (>70).
+
+    Outliers: A few predictions are way off (~100+ actuals with ~30 predicted).
+
+    Conclusion: Reasonable performance; underprediction at higher levels suggests the model might need help capturing extreme pollution.
+
+✅ 2. O₃ AQI
+
+    Trend: Good alignment for 0–100 AQI. Beyond that, predictions become more dispersed.
+
+    Bias: Again, underprediction for higher AQI values (>120).
+
+    Density: Large volume of predictions in the 30–100 actual range, suggesting many test examples lie there.
+
+    Conclusion: Acceptable performance, but high O₃ levels are underestimated — possibly due to class imbalance or data sparsity at the high end.
+
+✅ 3. SO₂ AQI
+
+    Trend: The model performs very well at low AQI levels (0–40).
+
+    Bias: Strong underprediction for mid-to-high range (60–100+), and a strange band of low predictions for high actuals.
+
+    Conclusion: Model likely learned a low variance pattern — this could mean:
+
+        Not enough high SO₂ samples
+
+        Over-regularized / underfitting
+
+✅ 4. CO AQI
+
+    Trend: Tight cluster, mostly below 30 AQI.
+
+    Bias: Slight underprediction but minimal.
+
+    Conclusion: Model performs best here. Low variance and low MAE likely reflect easier predictability or more consistent data patterns.
