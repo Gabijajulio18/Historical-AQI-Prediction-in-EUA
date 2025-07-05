@@ -51,6 +51,9 @@ def main():
 
     print(f"Train: {len(train_df)}, Val: {len(val_df)}, Test: {len(test_df)}")
 
+    with open("./data/test_df.pkl", "wb") as f:
+        pickle.dump(test_df, f)
+
     # Normalizer
     normalizer = Normalization()
     normalizer.adapt(X_train)
