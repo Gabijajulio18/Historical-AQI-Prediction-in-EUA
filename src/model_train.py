@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
+import pickle
 
 from utils import load_data, time_series_split
 from tensorflow.keras.models import Sequential
@@ -92,4 +93,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    history = main()
+
+    with open("./models/training_history.pkl", "wb") as f:
+        pickle.dump(history.history, f)
