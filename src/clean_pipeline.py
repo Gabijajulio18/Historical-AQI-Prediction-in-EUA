@@ -50,8 +50,8 @@ def clean_negative_concentrations(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def impute_missing_aqi(df: pd.DataFrame) -> pd.DataFrame:
-    df["SO2_AQI_missing"] = df["SO2 AQI"].isna().astype(int)
-    df["CO_AQI_missing"] = df["CO AQI"].isna().astype(int)
+    df["SO2_Mean_Imputed"] = df["SO2 AQI"].isna().astype(int)
+    df["CO_Mean_Imputed"] = df["CO AQI"].isna().astype(int)
 
     imputer = SimpleImputer(strategy="mean")
     df[["SO2 AQI", "CO AQI"]] = imputer.fit_transform(df[["SO2 AQI", "CO AQI"]])
