@@ -27,9 +27,15 @@ def main():
         "O3 Mean",
         "SO2 Mean",
         "CO Mean",
+        "SO2_Mean_Imputed",
+        "CO_Mean_Imputed",
         "NO2_to_SO2",
         "CO_to_SO2",
         "O3_to_CO",
+        "NO2 Mean_roll_3",
+        "O3 Mean_roll_3",
+        "SO2 Mean_roll_3",
+        "CO Mean_roll_3",
         "year",
         "month",
         "is_weekend",
@@ -69,7 +75,7 @@ def main():
 
     # Callbacks
     early_stop = EarlyStopping(patience=5, restore_best_weights=True)
-    reduce_lr = ReduceLROnPlateau(patience=3, factor=0.5)
+    reduce_lr = ReduceLROnPlateau(patience=3, factor=0.2, min_lr=1e-6)
 
     checkpoint_cb = ModelCheckpoint(
         "./models/best_aqi_model.keras",
@@ -89,6 +95,16 @@ def main():
         callbacks=[early_stop, reduce_lr, checkpoint_cb],
         verbose=1,
     )
+
+    # Predictions for training and validation
+    y_train_pred = model.predict(X_train)
+    y_val_pred = model.predict(X_val)
+
+    # Save predictions and true values to file
+    np.save("./models/y_train_pred.npy", y_train_pred)
+    np.save("./models/y_val_pred.npy", y_val_pred)
+    np.save("./models/y_train.npy", y_train)
+    np.save("./models/y_val.npy", y_val)
 
     return history
 
