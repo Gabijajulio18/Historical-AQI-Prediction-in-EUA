@@ -88,6 +88,8 @@ def main():
         verbose=1,
     )
 
+    return history
+
 
 if __name__ == "__main__":
     main()
