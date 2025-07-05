@@ -28,7 +28,7 @@ def add_rolling_means(df: pd.DataFrame, window: int = 3) -> pd.DataFrame:
     return df
 
 
-def features_pipeline(df: pd.DataFrame, rolling_window: int = 3) -> pd.DataFrame:
+def features_data_pipeline(df: pd.DataFrame, rolling_window: int = 3) -> pd.DataFrame:
     df = add_time_features(df)
     df = add_pollutant_interactions(df)
     df = add_rolling_means(df, rolling_window)

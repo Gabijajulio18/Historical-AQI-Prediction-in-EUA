@@ -1,6 +1,6 @@
 import os
-from cleaning import clean_data_pipeline
-from features import features_pipeline
+from clean_pipeline import clean_data_pipeline
+from features_pipeline import features_data_pipeline
 
 
 def ensure_dir_exists(path: str) -> None:
@@ -22,7 +22,7 @@ def main():
     df_cleaned.to_csv(cleaned_path, index=False)
 
     # Add features
-    df_features = features_pipeline(df_cleaned)
+    df_features = features_data_pipeline(df_cleaned)
 
     # Save featured data
     ensure_dir_exists(featured_path)
