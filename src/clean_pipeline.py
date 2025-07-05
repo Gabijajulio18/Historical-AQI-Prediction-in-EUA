@@ -55,7 +55,13 @@ def impute_missing_aqi(df: pd.DataFrame) -> pd.DataFrame:
 
     imputer = SimpleImputer(strategy="mean")
     df[["SO2 AQI", "CO AQI"]] = imputer.fit_transform(df[["SO2 AQI", "CO AQI"]])
+    return df
 
+
+def impute_missing_concentrations(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+    """Input NaN values in specified concentration columns using mean strategy"""
+    imputer = SimpleImputer(strategy="mean")
+    df[columns] = imputer.fit_transform(df[columns])
     return df
 
 
@@ -68,4 +74,7 @@ def clean_data_pipeline(
     df = clean_negative_concentrations(df)
     df_cleaned = clean_data(df)
     df_cleaned = impute_missing_aqi(df_cleaned)
+    # Impute concentrations after marking missingness
+    concentration_cols = ["SO2 Mean", "CO Mean"]
+    df_cleaned = impute_missing_concentrations(df_cleaned, concentration_cols)
     return df_cleaned
