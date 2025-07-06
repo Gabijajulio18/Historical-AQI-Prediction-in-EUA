@@ -170,42 +170,42 @@ cd Historical-AQI-Prediction-in-EUA
 
 ---
 
-## Install dependencies
+### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## Preprocess the data
+### Preprocess the data
 ```bash
 python src/data_prep.py
 ```
 
 ---
 
-## Train the model
+### Train the model
 ```bash
 python src/model_train.py
 ```
 
 ---
 
-## Predict from saved model (WIP)
+### Predict from saved model (WIP)
 ```bash
 python src/predict_aqi.py --input sample_input.csv
 ```
 
 ---
 
-## Run the API (WIP)
+### Run the API (WIP)
 ```bash
 uvicorn src.api:app --reload
 ```
 
 ---
 
-## Dockerize the App (WIP)
+### Dockerize the App (WIP)
 ```bash
 docker build -t aqi-api .
 docker run -p 8000:8000 aqi-api
