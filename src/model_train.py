@@ -104,10 +104,10 @@ def main():
     y_val_pred = model.predict(X_val)
 
     # Save predictions and true values to file
-    np.save("./models/y_train_pred.npy", y_train_pred)
-    np.save("./models/y_val_pred.npy", y_val_pred)
-    np.save("./models/y_train.npy", y_train)
-    np.save("./models/y_val.npy", y_val)
+    np.save("./models/preds/y_train_pred.npy", y_train_pred)
+    np.save("./models/preds/y_val_pred.npy", y_val_pred)
+    np.save("./models/preds/y_train.npy", y_train)
+    np.save("./models/preds/y_val.npy", y_val)
 
     return history
 
