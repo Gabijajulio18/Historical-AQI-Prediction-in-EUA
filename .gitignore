@@ -215,4 +215,5 @@ pollutants_with_features.csv
 # Model artifacts
 models/*.keras
 models/*.pkl
-models/preds/
+models/preds/*.npy
+data/*.pkl
