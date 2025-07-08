@@ -52,7 +52,15 @@ def predict(input_csv: str, model_path: str = "../models/best_aqi:model.keras") 
 
     if __name__ == "__main__":
         parser = argparse.ArgumentParser(description="Run AQI predictions on new data")
-        parser.add_argument("--input", required=True, help="Path to input CSV file")
+        parser.add_argument(
+            "--input", type=str, required=True, help="Path to input CSV file"
+        )
+        parser.add_argument(
+            "-- model",
+            type=str,
+            default="models/best_aqi_model.keras",
+            help="Path to model",
+        )
         args = parser.parse_args()
 
-        predict(args)
+        predict(args.input, args.model)
