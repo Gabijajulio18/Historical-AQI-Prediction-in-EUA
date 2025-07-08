@@ -27,6 +27,10 @@ def predict(input_csv: str, model_path: str = "../models/best_aqi:model.keras") 
     # Load input CSV
     df = pd.read_csv(input_csv)
 
+    if not set(X_COLS).issubset(df.columns):
+        missing = set(X_COLS) - set(df.columns)
+        raise ValueError(f"Missing  columns in input: {missing}")
+
     # Extract features
     X = df[X_COLS].values
 
