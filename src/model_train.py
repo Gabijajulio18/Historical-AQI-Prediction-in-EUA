@@ -109,8 +109,10 @@ def main():
     np.save("./models/preds/y_val_pred.npy", y_val_pred)
     np.save("./models/preds/y_train.npy", y_train)
     np.save("./models/preds/y_val.npy", y_val)
+    model.save("./models/best_aqi_model.keras")
     with open("./models/X_cols.json", "w") as f:
         json.dump(X_cols, f)
+    print(model.input_shape)
 
     return history
 

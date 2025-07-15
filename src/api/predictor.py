@@ -11,6 +11,8 @@ MODEL_PATH = "../models/best_aqi_model.keras"
 
 # Load model
 model = load_model(MODEL_PATH)
+print("Loaded model from:", MODEL_PATH)
+print("Loaded model input shape:", model.input_shape)
 
 
 def predict_aqi_from_df(df: pd.DataFrame) -> np.ndarray:
