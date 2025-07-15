@@ -23,7 +23,7 @@ X_COLS = [
 ]
 
 
-def predict(input_csv: str, model_path: str = "../models/best_aqi:model.keras") -> None:
+def predict(input_csv: str, model_path: str = "../models/best_aqi_model.keras") -> None:
     # Load input CSV
     df = pd.read_csv(input_csv)
 
