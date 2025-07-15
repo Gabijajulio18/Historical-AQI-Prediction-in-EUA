@@ -2,25 +2,10 @@ from fastapi import FastAPI
 from src.api.schema import AQIRequest
 from src.api.predictor import predict_aqi_from_df
 import pandas as pd
+import json
 
-X_cols = [
-    "NO2 Mean",
-    "O3 Mean",
-    "SO2 Mean",
-    "CO Mean",
-    "SO2_Mean_Imputed",
-    "CO_Mean_Imputed",
-    "NO2_to_SO2",
-    "CO_to_SO2",
-    "O3_to_CO",
-    "NO2 Mean_roll_3",
-    "O3 Mean_roll_3",
-    "SO2 Mean_roll_3",
-    "CO Mean_roll_3",
-    "year",
-    "month",
-    "is_weekend",
-]
+with open("./models/X_cols.json", "r") as f:
+    X_cols = json.load(f)
 
 app = FastAPI()
 

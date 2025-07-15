@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import tensorflow as tf
 import pickle
+import json
 
 from utils import load_data, time_series_split
 from tensorflow.keras.models import Sequential
@@ -108,6 +109,8 @@ def main():
     np.save("./models/preds/y_val_pred.npy", y_val_pred)
     np.save("./models/preds/y_train.npy", y_train)
     np.save("./models/preds/y_val.npy", y_val)
+    with open("./models/X_cols.json", "w") as f:
+        json.dump(X_cols, f)
 
     return history
 

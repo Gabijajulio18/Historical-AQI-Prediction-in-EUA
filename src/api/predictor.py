@@ -1,28 +1,13 @@
 import numpy as np
 import pandas as pd
+import json
 from tensorflow.keras.models import load_model
 
+with open("./models/X_cols.json", "r") as f:
+    X_cols = json.load(f)
 
 MODEL_PATH = "../models/best_aqi_model.keras"
 
-X_cols = [
-    "NO2 Mean",
-    "O3 Mean",
-    "SO2 Mean",
-    "CO Mean",
-    "SO2_Mean_Imputed",
-    "CO_Mean_Imputed",
-    "NO2_to_SO2",
-    "CO_to_SO2",
-    "O3_to_CO",
-    "NO2 Mean_roll_3",
-    "O3 Mean_roll_3",
-    "SO2 Mean_roll_3",
-    "CO Mean_roll_3",
-    "year",
-    "month",
-    "is_weekend",
-]
 
 # Load model
 model = load_model(MODEL_PATH)
