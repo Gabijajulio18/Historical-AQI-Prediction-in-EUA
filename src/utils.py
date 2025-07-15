@@ -57,9 +57,13 @@ def compute_aqi(
     for C_low, C_high, I_low, I_high in breakpoints:
         if C_low <= concentration <= C_high:
             return round(
-                (I_high - I_low) / (C_high - C_low) * (concentration - C_low) + I_low
+                (I_high - I_low)
+                / (C_high - C_low)
+                * (concentration - C_low)
+                + I_low
             )
-        return np.nan  # Outside known range
+
+    return np.nan  # Outside known range
 
 
 def estimate_missing_aqi(df: pd.DataFrame) -> pd.DataFrame:
