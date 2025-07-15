@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "NO2 Mean": 18.2,
+      "O3 Mean": 42.5,
+      "SO2 Mean": 2.3,
+      "CO Mean": 0.9,
+      "SO2_Mean_Imputed": 2.3,
+      "CO_Mean_Imputed": 0.9,
+      "NO2_to_SO2": 7.91,
+      "CO_to_SO2": 0.39,
+      "O3_to_CO": 47.22,
+      "NO2 Mean_roll_3": 18.2,
+      "O3 Mean_roll_3": 42.5,
+      "SO2 Mean_roll_3": 2.3,
+      "CO Mean_roll_3": 0.9,
+      "year": 2015,
+      "month": 7,
+      "is_weekend": 0
+    }
+  ]
+}
