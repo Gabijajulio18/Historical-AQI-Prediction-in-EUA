@@ -205,20 +205,35 @@ uvicorn src.api:app --reload
 
 ---
 
+### Run the Dashboard
+```bash
+streamlit run dashboard.py
+```
+
+---
+
+### Run Tests
+```bash
+pytest
+```
+
+---
+
 ### Dockerize the App (WIP)
 ```bash
 docker build -t aqi-api .
 docker run -p 8000:8000 aqi-api
 ```
 
+### Deploy with Docker Compose
+```bash
+docker compose up --build
+```
+
 ---
 
 ## Next Steps
 
-- Add predict_aqi.py for clean inference
-
-- Deploy FastAPI server with api.py
-
-- Build and test Dockerfile
-
-- Add unit tests and CI workflow
+- Expand `predict_aqi.py` for batch inference
+- Deploy the API using a cloud service (e.g. AWS, Render)
+- Set up continuous integration for automated testing
