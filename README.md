@@ -189,7 +189,7 @@ pip install -r requirements.txt
 
 ### Preprocess the data
 ```bash
-python src/data_prep.py
+python src/scripts/data_pipeline.py
 ```
 
 ---
