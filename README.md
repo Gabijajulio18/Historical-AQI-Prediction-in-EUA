@@ -74,12 +74,22 @@ Historical-AQI-Prediction-in-EUA/
 │ 
 ├── notebooks/ # EDA and model development notebooks 
 │ 
-├── src/ # Source code 
-│ ├── data_prep.py # Data cleaning & feature generation 
-│ ├── model_train.py # Model training pipeline 
-│ ├── predict_aqi.py # Inference script (WIP) 
-│ ├── api.py # REST API with FastAPI (WIP) 
-│ └── utils.py # Shared functions/utilities 
+├── src/ # Source code
+│ ├── api/ # FastAPI app
+│ │   ├── main.py
+│ │   ├── predictor.py
+│ │   ├── schema.py
+│ │   └── sample_payload.json
+│ ├── pipelines/ # Data cleaning and feature engineering
+│ │   ├── clean_pipeline.py
+│ │   └── features_pipeline.py
+│ ├── training/ # Model training
+│ │   └── model_train.py
+│ ├── scripts/ # Command line utilities
+│ │   ├── data_pipeline.py
+│ │   ├── generate_sample_input.py
+│ │   └── predict_aqi.py
+│ └── utils.py # Shared helper functions
 │ 
 ├── Dockerfile # Docker image definition (WIP) 
 ├── requirements.txt # Python dependencies 
@@ -186,21 +196,21 @@ python src/data_prep.py
 
 ### Train the model
 ```bash
-python src/model_train.py
+python src/training/model_train.py
 ```
 
 ---
 
 ### Predict from saved model (WIP)
 ```bash
-python src/predict_aqi.py --input sample_input.csv
+python src/scripts/predict_aqi.py --input data/sample_input.csv
 ```
 
 ---
 
 ### Run the API (WIP)
 ```bash
-uvicorn src.api:app --reload
+uvicorn src.api.main:app --reload
 ```
 
 ---
@@ -215,9 +225,9 @@ docker run -p 8000:8000 aqi-api
 
 ## Next Steps
 
-- Add predict_aqi.py for clean inference
+- Use `scripts/predict_aqi.py` for clean inference
 
-- Deploy FastAPI server with api.py
+- Deploy FastAPI server with `api` module
 
 - Build and test Dockerfile
 

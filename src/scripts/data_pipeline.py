@@ -1,6 +1,6 @@
 import os
-from clean_pipeline import clean_data_pipeline
-from features_pipeline import features_data_pipeline
+from src.pipelines.clean_pipeline import clean_data_pipeline
+from src.pipelines.features_pipeline import features_data_pipeline
 
 
 def ensure_dir_exists(path: str) -> None:

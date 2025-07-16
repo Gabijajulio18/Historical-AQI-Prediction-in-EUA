@@ -59,7 +59,7 @@ def compute_aqi(
             return round(
                 (I_high - I_low) / (C_high - C_low) * (concentration - C_low) + I_low
             )
-        return np.nan  # Outside known range
+    return np.nan  # Outside known range
 
 
 def estimate_missing_aqi(df: pd.DataFrame) -> pd.DataFrame:

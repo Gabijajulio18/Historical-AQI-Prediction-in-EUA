@@ -23,7 +23,7 @@ X_COLS = [
 ]
 
 
-def predict(input_csv: str, model_path: str = "../models/best_aqi_model.keras") -> None:
+def predict(input_csv: str, model_path: str = "models/best_aqi_model.keras") -> None:
     # Load input CSV
     df = pd.read_csv(input_csv)
 
@@ -41,26 +41,28 @@ def predict(input_csv: str, model_path: str = "../models/best_aqi_model.keras") 
     preds = model.predict(X)
 
     # Format results
-    pred_df = pd.DataFrame(preds, columns=["AQI_NO2", "AQI_03", "AQI_SO2", "AQI_CO"])
-    outut_df = pd.concat([df.reset_index(drop=True), pred_df], axis=1)
+    pred_df = pd.DataFrame(
+        preds, columns=["AQI_NO2", "AQI_O3", "AQI_SO2", "AQI_CO"]
+    )
+    output_df = pd.concat([df.reset_index(drop=True), pred_df], axis=1)
 
     # Save
     output_path = input_csv.replace(".csv", "_predicted.csv")
-    outut_df.to_csv(output_path, index=False)
+    output_df.to_csv(output_path, index=False)
     print(f"Predictions saved to: {output_path}")
-    print(outut_df[["AQI_NO2", "AQI_03", "AQI_SO2", "AQI_CO"]].head())
+    print(output_df[["AQI_NO2", "AQI_O3", "AQI_SO2", "AQI_CO"]].head())
 
-    if __name__ == "__main__":
-        parser = argparse.ArgumentParser(description="Run AQI predictions on new data")
-        parser.add_argument(
-            "--input", type=str, required=True, help="Path to input CSV file"
-        )
-        parser.add_argument(
-            "-- model",
-            type=str,
-            default="models/best_aqi_model.keras",
-            help="Path to model",
-        )
-        args = parser.parse_args()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run AQI predictions on new data")
+    parser.add_argument(
+        "--input", type=str, required=True, help="Path to input CSV file"
+    )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="models/best_aqi_model.keras",
+        help="Path to model",
+    )
+    args = parser.parse_args()
 
-        predict(args.input, args.model)
+    predict(args.input, args.model)
