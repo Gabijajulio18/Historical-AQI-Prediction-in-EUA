@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 with open("./models/X_cols.json", "r") as f:
     X_cols = json.load(f)
 
-MODEL_PATH = "../models/best_aqi_model.keras"
+MODEL_PATH = "models/best_aqi_model.keras"
 
 
 # Load model
@@ -18,10 +18,11 @@ print("Loaded model input shape:", model.input_shape)
 def predict_aqi_from_df(df: pd.DataFrame) -> np.ndarray:
     # Ensure input order matches training columns
     input_data = df[X_cols].values
-    print(input_data.shape)
-    assert (
-        df.shape[1] == model.input_shape[1]
-    ), f"Model expects {model.input_shape[1]} features, but got {df.shape[1]}"
+    if input_data.shape[1] != model.input_shape[1]:
+        raise ValueError(
+            f"Model expects {model.input_shape[1]} features, "
+            f"but got {input_data.shape[1]}"
+        )
     preds = model.predict(input_data)
 
     return preds
