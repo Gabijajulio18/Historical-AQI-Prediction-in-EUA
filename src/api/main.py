@@ -33,10 +33,12 @@ def predict(request: AQIRequest):
 
     results = [
         {
+
             "NO2 AQI": float(round(p[0], 2)),
             "O3 AQI": float(round(p[1], 2)),
             "SO2 AQI": float(round(p[2], 2)),
             "CO AQI": float(round(p[3], 2)),
+
         }
         for p in preds
     ]
