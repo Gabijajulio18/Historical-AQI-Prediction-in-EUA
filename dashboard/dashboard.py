@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import statsmodels as sm
 
 
 @st.cache_data
@@ -14,12 +15,26 @@ def load_data():
         df[f"{p} Pred"] = y_pred[:, i]
     return df, pollutants
 
+
 df, pollutants = load_data()
 
 st.title("AQI Prediction Dashboard")
 
 for p in pollutants:
-    fig = px.scatter(df, x=f"{p} True", y=f"{p} Pred", trendline="ols",
-                     labels={f"{p} True": "Actual", f"{p} Pred": "Predicted"},
-                     title=f"{p} - Actual vs Predicted")
+    fig = px.scatter(
+        df,
+        x=f"{p} True",
+        y=f"{p} Pred",
+        trendline="ols",
+        labels={f"{p} True": "Actual", f"{p} Pred": "Predicted"},
+        title=f"{p} - Actual vs Predicted",
+    )
+    # Add actual values as a separate trace (e.g., diagonal line for reference)
+    fig.add_scatter(
+        x=df[f"{p} True"],
+        y=df[f"{p} True"],
+        mode="lines",
+        name="Ideal (True = Pred)",
+        line=dict(color="green", dash="dash"),
+    )
     st.plotly_chart(fig, use_container_width=True)
