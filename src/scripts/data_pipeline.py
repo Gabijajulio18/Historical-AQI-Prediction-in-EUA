@@ -14,12 +14,8 @@ def main():
     featured_path = "data/processed/pollutants_with_features.csv"
     pollutants = ["NO2 AQI", "O3 AQI", "SO2 AQI", "CO AQI"]
 
-    # Clean the data
+    # Clean the data and save to cleaned_path inside the pipeline
     df_cleaned = clean_data_pipeline(input_path, cleaned_path, pollutants)
-
-    # Save clean data
-    ensure_dir_exists(cleaned_path)
-    df_cleaned.to_csv(cleaned_path, index=False)
 
     # Add features
     df_features = features_data_pipeline(df_cleaned)
