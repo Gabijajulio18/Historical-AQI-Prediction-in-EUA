@@ -20,7 +20,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your code
+# Copy the rest of code
 COPY . .
 
 # Expose the port FastAPI runs on
