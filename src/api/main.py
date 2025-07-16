@@ -16,7 +16,7 @@ def root():
     return {
         "message": "Historical AQI Prediction API is running",
         "endpoints": {
-            "POST /predict": "Send air quality data to received AQI predictions"
+            "POST /predict": "Send air quality data to receive AQI predictions"
         },
         "example_payload": "/api/sample_payload.json",
     }
@@ -25,7 +25,7 @@ def root():
 @app.post("/predict")
 def predict(request: AQIRequest):
 
-    df = pd.DataFrame([item.model_dump(by_alias=True) for item in request.data])
+    df = pd.DataFrame([item.dict(by_alias=True) for item in request.data])
 
     df = df.reindex(columns=X_cols)
 
@@ -33,10 +33,10 @@ def predict(request: AQIRequest):
 
     results = [
         {
-            "N02 AQI": round(p[0], 2),
-            "O3 AQI": round(p[1], 2),
-            "SO2 AQI": round(p[2], 2),
-            "CO AQI": round(p[3], 2),
+            "NO2 AQI": float(round(p[0], 2)),
+            "O3 AQI": float(round(p[1], 2)),
+            "SO2 AQI": float(round(p[2], 2)),
+            "CO AQI": float(round(p[3], 2)),
         }
         for p in preds
     ]
