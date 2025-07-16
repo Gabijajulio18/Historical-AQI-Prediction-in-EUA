@@ -21,7 +21,7 @@ class AQIInputItem(BaseModel):
     is_weekend: int
 
     class Config:
-        validate_by_name = True
+        allow_population_by_field_name = True
 
 
 class AQIRequest(BaseModel):
