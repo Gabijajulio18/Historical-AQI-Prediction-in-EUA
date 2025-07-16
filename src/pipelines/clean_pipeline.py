@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from utils import estimate_missing_aqi
+from src.utils import estimate_missing_aqi
 from sklearn.impute import SimpleImputer
 
 
@@ -67,7 +67,7 @@ def impute_missing_concentrations(df: pd.DataFrame, columns: list[str]) -> pd.Da
 
 def clean_data_pipeline(
     input_path: str, output_path: str, pollutants: list[str]
-) -> None:
+) -> pd.DataFrame:
     df = load_data(input_path)
     inspect_data(df)
     analyze_coverage_by_state(df, pollutants)
@@ -77,4 +77,9 @@ def clean_data_pipeline(
     # Impute concentrations after marking missingness
     concentration_cols = ["SO2 Mean", "CO Mean"]
     df_cleaned = impute_missing_concentrations(df_cleaned, concentration_cols)
+
+    # Save the cleaned dataframe to the specified path
+    if output_path:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        df_cleaned.to_csv(output_path, index=False)
     return df_cleaned

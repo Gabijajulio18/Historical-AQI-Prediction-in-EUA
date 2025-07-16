@@ -4,7 +4,7 @@ import tensorflow as tf
 import pickle
 import json
 
-from utils import load_data, time_series_split
+from src.utils import load_data, time_series_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import (
     Dense,
